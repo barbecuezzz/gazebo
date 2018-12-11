@@ -5,6 +5,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/zyj/gazebo_plugin_tutorial/my_exo.cc" "/home/zyj/gazebo_plugin_tutorial/build/CMakeFiles/my_exo.dir/my_exo.cc.o"
+  "/home/zyj/gazebo_plugin_tutorial/program/build_robot.cpp" "/home/zyj/gazebo_plugin_tutorial/build/CMakeFiles/my_exo.dir/program/build_robot.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -25,6 +26,7 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   "/usr/include/OGRE/Paging"
   "/usr/include/ignition/transport3"
   "/usr/include/uuid"
+  ".././program"
   "/usr/include/ignition/math3"
   "/usr/include/ignition/msgs0"
   )

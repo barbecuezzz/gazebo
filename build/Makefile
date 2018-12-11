@@ -150,6 +150,33 @@ my_exo.cc.s:
 	$(MAKE) -f CMakeFiles/my_exo.dir/build.make CMakeFiles/my_exo.dir/my_exo.cc.s
 .PHONY : my_exo.cc.s
 
+program/build_robot.o: program/build_robot.cpp.o
+
+.PHONY : program/build_robot.o
+
+# target to build an object file
+program/build_robot.cpp.o:
+	$(MAKE) -f CMakeFiles/my_exo.dir/build.make CMakeFiles/my_exo.dir/program/build_robot.cpp.o
+.PHONY : program/build_robot.cpp.o
+
+program/build_robot.i: program/build_robot.cpp.i
+
+.PHONY : program/build_robot.i
+
+# target to preprocess a source file
+program/build_robot.cpp.i:
+	$(MAKE) -f CMakeFiles/my_exo.dir/build.make CMakeFiles/my_exo.dir/program/build_robot.cpp.i
+.PHONY : program/build_robot.cpp.i
+
+program/build_robot.s: program/build_robot.cpp.s
+
+.PHONY : program/build_robot.s
+
+# target to generate assembly for a file
+program/build_robot.cpp.s:
+	$(MAKE) -f CMakeFiles/my_exo.dir/build.make CMakeFiles/my_exo.dir/program/build_robot.cpp.s
+.PHONY : program/build_robot.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -162,6 +189,9 @@ help:
 	@echo "... my_exo.o"
 	@echo "... my_exo.i"
 	@echo "... my_exo.s"
+	@echo "... program/build_robot.o"
+	@echo "... program/build_robot.i"
+	@echo "... program/build_robot.s"
 .PHONY : help
 
 

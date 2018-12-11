@@ -1,11 +1,23 @@
 #ifndef _BUILD_ROBOT_H_
 #define _BUILD_ROBOT_H_
 #include<iostream>
-#include"Dense"
+#include <Eigen/Dense>
+// #include <unsupported/Eigen/FFT>
 #include"math.h"
 
+#define  PI  3.1415926
+#define  A  0.5
+#define  B  0.45
+#define ToRad PI/180
 using namespace std;
 using namespace Eigen;
+
+
+Matrix3d Rodrigues(Vector3d a, double q);
+Matrix3d Rroll(double q);
+Matrix3d Rpitch(double q);
+Matrix3d Mathat(Vector3d a);
+int sign(double a);
 
 
 typedef struct _DATA_
@@ -86,10 +98,10 @@ public:
 	void ForwardKinematics(ListNode *from);
 	// void InverseKinematics(ListNode *body,ListNode *ankle, Target target);
 	/*void FoundData(int id);*/
-	// void IK_leg(ListNode *E, ListNode *S);
+	void IK_leg(ListNode *E, ListNode *S);
 	int build_robot_model();
 	// void get_joint_angle_from_ternimal_position(Vector3d P);
-
+	
 	/*void DispList();
 	void DelList();*/
 };

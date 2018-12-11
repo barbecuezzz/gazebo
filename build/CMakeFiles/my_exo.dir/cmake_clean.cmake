@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/my_exo.dir/my_exo.cc.o"
+  "CMakeFiles/my_exo.dir/program/build_robot.cpp.o"
   "libmy_exo.pdb"
   "libmy_exo.so"
 )

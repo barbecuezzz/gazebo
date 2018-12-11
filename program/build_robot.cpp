@@ -1,9 +1,12 @@
 #include <iostream>
-#include"Dense"
+#include <Eigen/Dense>
 #include"math.h"
 #include"build_robot.h"
+// #include <unsupported/Eigen/FFT>
 
-#define  PI  3.1415926
+using namespace std;
+double q2, q3, q4, q5, q6, q7;
+const Vector3d D(0,0.3,0);
 const Matrix3d eye1 = Matrix3d::Identity(3, 3);
 ListNode I1;
 ListNode I2;
@@ -59,9 +62,10 @@ void ListNode::IK_leg(ListNode *E, ListNode *S)
 {
 	Matrix3d R;
 	Vector3d r;
+	
 	double C;
-
 	double c5, q6a, cz, sz;
+	
 
 
 	r = E->data.R.transpose() * ((S->data.p) + (S->data.R * D) - (E->data.p));
@@ -95,6 +99,59 @@ void ListNode::IK_leg(ListNode *E, ListNode *S)
 	q(5) = q7;*/
 }
 
+Matrix3d Rodrigues(Vector3d a, double q)
+{
+	Matrix3d temp;
+	Vector3d an;
+	float a_a;
+	float th;
+	a_a = sqrt(a(0)*a(0)+a(1)*a(1)+a(2)*a(2));
+	th = a_a*q;
+	an<<a(0)/a_a,a(1)/a_a,a(2)/a_a;
+	temp = eye1 + (sin(th)*Mathat(an)) + ((1 - cos(th))*(Mathat(an)*Mathat(an)));
+	return (temp);
+}
+
+
+Matrix3d Rroll(double q)
+{
+	Matrix3d temp;
+	temp << 1, 0, 0,
+		0, cos(q), -sin(q),
+		0, sin(q), cos(q);
+	return temp;
+}
+
+Matrix3d Rpitch(double q)
+{
+	Matrix3d temp;
+	temp << cos(q), 0, sin(q),
+		0, 1, 0,
+		-sin(q), 0, cos(q);
+	return temp;
+}
+
+Matrix3d Mathat(Vector3d a)
+{
+	Matrix3d temp1;
+	temp1 << 0, (-a(2)), a(1),
+		a(2), 0, (-a(0)),
+		(-a(1)), a(0), 0;
+	//temp1 << 0, a(2), -a(1),
+	//	-a(2), 0, a(0),
+	//	a(1), -a(0), 0;
+	return temp1;
+}
+
+int sign(double a)
+{
+	if (a > 0)
+		return 1;
+	if (a < 0)
+		return -1;
+	if (a = 0)
+		return 0;
+}
 // void ListNode::InverseKinematics(ListNode *from,ListNode *to, Target target)
 // {
 // 	ListNode::ForwardKinematics(from);
@@ -109,16 +166,16 @@ int build_robot_model()
 {
 	Vector3d v(0,0,0);
 
-	Vector3d body_p(0,0,1.7)
+	Vector3d body_p(0,0,1.22);
 
-	Vector3d body_b(0,0,0)
-	Vector3d left_hip_joint_r_b(0,0.3,-0.1);
+	Vector3d body_b(0,0,0);
+	Vector3d left_hip_joint_r_b(0,0.3,0);
 	Vector3d left_hip_joint_p_b(0,0,0);
 	Vector3d left_hip_joint_y_b(0,0,0);
 	Vector3d left_knee_joint_p_b(0,0,-0.6);
 	Vector3d left_ankle_joint_p_b(0,0,-0.55);
 	Vector3d left_ankle_joint_r_b(0,0,0);
-	Vector3d right_hip_joint_r_b(0,-0.3,-0.1);
+	Vector3d right_hip_joint_r_b(0,-0.3,0);
 	Vector3d right_hip_joint_p_b(0,0,0);
 	Vector3d right_hip_joint_y_b(0,0,0);
 	Vector3d right_knee_joint_p_b(0,0,-0.6);
@@ -145,11 +202,11 @@ int build_robot_model()
 	I1.data = temp1;
 	Data temp2 = { 2, "left_hip_joint_r", 8, 3, 1, v, eye1, v, v, 0, 0, 0, left_hip_joint_r_a, left_hip_joint_r_b, 0, 0, 0 };
 	I2.data = temp2;
-	Data temp3 = { 3, "left_hip_joint_p", 0, 4, 2, v, eye1, v, v, 0, 0, 0, left_hip_joint_p_a, left_hip_joint_p_b, 0, 0, 0 };
+	Data temp3 = { 3, "left_hip_joint_p", 0, 4, 2, v, eye1, v, v, -1*ToRad, 0, 0, left_hip_joint_p_a, left_hip_joint_p_b, 0, 0, 0 };
 	I3.data = temp3;
 	Data temp4 = { 4, "left_hip_joint_y", 0, 5, 3, v, eye1, v, v, 0, 0, 0, left_hip_joint_y_a, left_hip_joint_y_b, 0, 0, 0 };
 	I4.data = temp4;
-	Data temp5 = { 5, "left_knee_joint_p", 0, 6, 4, v, eye1, v, v, 0, 0, 0, left_knee_joint_p_a, left_knee_joint_p_b, 0, 0, 0 };
+	Data temp5 = { 5, "left_knee_joint_p", 0, 6, 4, v, eye1, v, v, 1*ToRad, 0, 0, left_knee_joint_p_a, left_knee_joint_p_b, 0, 0, 0 };
 	I5.data = temp5;
 	Data temp6 = { 6, "left_ankle_joint_p", 0, 7, 5, v, eye1, v, v, 0, 0, 0, left_ankle_joint_p_a, left_ankle_joint_p_b, 0, 0, 0 };
 	I6.data = temp6;
@@ -157,11 +214,11 @@ int build_robot_model()
 	I7.data = temp7;
 	Data temp8 = { 8, "right_hip_joint_r", 0, 9, 1, v, eye1, v, v, 0, 0, 0, right_hip_joint_r_a, right_hip_joint_r_b, 0, 0, 0 };
 	I8.data = temp8;
-	Data temp9 = { 9, "right_hip_joint_p", 0, 10, 8, v, eye1, v, v, 0, 0, 0, right_hip_joint_p_a, right_hip_joint_p_b, 0, 0, 0 };
+	Data temp9 = { 9, "right_hip_joint_p", 0, 10, 8, v, eye1, v, v, -1*ToRad, 0, 0, right_hip_joint_p_a, right_hip_joint_p_b, 0, 0, 0 };
 	I9.data = temp9;
 	Data temp10 = { 10, "right_hip_joint_y", 0, 11, 9, v, eye1, v, v, 0, 0, 0, right_hip_joint_y_a, right_hip_joint_y_b, 0, 0, 0 };
 	I10.data = temp10;
-	Data temp11 = { 11, "right_knee_joint_p", 0, 12, 10, v, eye1, v, v, 0, 0, 0, right_knee_joint_p_a, right_knee_joint_p_b, 0, 0, 0 };
+	Data temp11 = { 11, "right_knee_joint_p", 0, 12, 10, v, eye1, v, v, 1*ToRad, 0, 0, right_knee_joint_p_a, right_knee_joint_p_b, 0, 0, 0 };
 	I11.data = temp11;
 	Data temp12 = { 12, "right_ankle_joint_p", 0, 13, 11, v, eye1, v, v, 0, 0, 0, right_ankle_joint_p_a, right_ankle_joint_p_b, 0, 0, 0 };
 	I12.data = temp12;
@@ -181,4 +238,5 @@ int build_robot_model()
 	I11.AppendNodeChild(I12);
 	I12.AppendNodeChild(I13);
 	I1.ForwardKinematics(&I1);
+	cout<<"-------------"<<endl;
 }

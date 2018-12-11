@@ -1,6 +1,6 @@
 #include <istream>
 #include "math.h"
-#include "Dense"
+#include <Eigen/Dense>
 #include "algorithm.h"
 
 

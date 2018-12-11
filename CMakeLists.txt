@@ -5,7 +5,10 @@ include_directories(${GAZEBO_INCLUDE_DIRS})
 link_directories(${GAZEBO_LIBRARY_DIRS})
 list(APPEND CMAKE_CXX_FLAGS "${GAZEBO_CXX_FLAGS}")
 
-add_library(my_exo SHARED my_exo.cc)
+
+include_directories(./program)
+
+add_library(my_exo SHARED my_exo.cc ./program/build_robot.cpp )
 target_link_libraries(my_exo
   ${GAZEBO_LIBRARIES}
 )

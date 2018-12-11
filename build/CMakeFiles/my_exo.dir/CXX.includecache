@@ -6,6 +6,14 @@
 
 #IncludeRegexTransform: 
 
+.././program/build_robot.h
+iostream
+-
+Eigen/Dense
+-
+math.h
+.././program/math.h
+
 /home/zyj/gazebo_plugin_tutorial/my_exo.cc
 functional
 -
@@ -25,6 +33,8 @@ iostream
 -
 math.h
 -
+build_robot.h
+/home/zyj/gazebo_plugin_tutorial/build_robot.h
 gazebo/physics/Model.hh
 -
 
