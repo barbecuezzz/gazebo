@@ -17,6 +17,7 @@ set(CMAKE_TARGET_DEFINITIONS_CXX
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+<<<<<<< HEAD
   "/usr/include/gazebo-9"
   "/usr/include/bullet"
   "/usr/include/simbody"
@@ -32,6 +33,20 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
   ".././program"
   "/usr/include/uuid"
   "/usr/include/x86_64-linux-gnu"
+=======
+  "/usr/include/gazebo-8"
+  "/usr/include/bullet"
+  "/usr/include/simbody"
+  "/usr/include/sdformat-5.3"
+  "/usr/include/OGRE"
+  "/usr/include/OGRE/Terrain"
+  "/usr/include/OGRE/Paging"
+  "/usr/include/ignition/transport3"
+  "/usr/include/uuid"
+  ".././program"
+  "/usr/include/ignition/math3"
+  "/usr/include/ignition/msgs0"
+>>>>>>> 69c531b0ec46545735f0aaec4b4279691c10b40c
   )
 
 # Targets to which this target links.

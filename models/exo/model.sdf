@@ -757,7 +757,11 @@
 
    		<include>
       		<uri>model://hokuyo</uri>
+<<<<<<< HEAD
       		<pose>0 0.39 0.07 -1.5708 -1.5708 0</pose>
+=======
+      		<pose>0 0.39 0.45 -1.5708 -1.5708 0</pose>
+>>>>>>> 69c531b0ec46545735f0aaec4b4279691c10b40c
 		</include>
 
     	<joint name="hokuyo_joint" type="fixed">
@@ -766,6 +770,7 @@
       		<parent>left_foot</parent>
     	</joint>
 
+<<<<<<< HEAD
     	<include>
     		<uri>model://imu</uri>
     		<pose>-0.3 0 1.32 0 0 0</pose>
@@ -775,6 +780,8 @@
     		<child>imu::link</child>
     		<parent>body</parent>
     	</joint>
+=======
+>>>>>>> 69c531b0ec46545735f0aaec4b4279691c10b40c
     	<!-- <joint name="right_hip_joint_r" type="revolute">
 			<parent>body</parent>
 			<child>right_upper_leg</child>

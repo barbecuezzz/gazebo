@@ -4527,6 +4527,7 @@ Linking C executable cmTC_7fbb4
 make[1]: Leaving directory '/home/zyj/gazebo_plugin_tutorial/build/CMakeFiles/CMakeTmp'
 
 
+<<<<<<< HEAD
 The system is: Linux - 4.15.0-29-generic - x86_64
 Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
 Compiler: /usr/bin/cc 
@@ -5162,3 +5163,5 @@ make[1]: 离开目录“/home/zyj/gazebo_plugin_tutorial/build/CMakeFiles/CMakeT
     Feature record: CXX_FEATURE:0cxx_variable_templates
     Feature record: CXX_FEATURE:0cxx_variadic_macros
     Feature record: CXX_FEATURE:0cxx_variadic_templates
+=======
+>>>>>>> 69c531b0ec46545735f0aaec4b4279691c10b40c
